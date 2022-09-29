@@ -1,7 +1,5 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.views import PasswordChangeView
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -93,7 +91,6 @@ class ChangeProfileView(PermissionRequiredMixin, UpdateView):
             return self.form_invalid(form, profile_form)
 
     def form_valid(self, form, profile_form):
-        # self.get_form()
         form.save()
         profile_form.save()
         return redirect("accounts:profile", self.object.pk)
